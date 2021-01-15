@@ -30,7 +30,12 @@ class BookController extends Controller
     public function create(Request $request)
     {
 
-        $book = Book::firstOrCreate($request->all());
+        $book = Book::firstOrCreate([
+            'name' => $request->get('name'),
+            'isbn'  => $request->get('isbn')
+        ]);
+
+        $book->categories()->sync($request->get('categories'));
 
         $presenter = new BookInfoPresenter($book);
         $presenter->additional(['success' => true]);
@@ -63,9 +68,18 @@ class BookController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        return view('book::edit');
+        $book = Book::findOrFail($id);
+
+        $book->update([
+           'name' => $request->get('name'),
+           'isbn'  => $request->get('isbn')
+        ]);
+
+        $book->categories()->sync($request->get('categories'));
+
+        return response()->json(['msg' => 'Successful edited']);
     }
 
     /**
@@ -86,6 +100,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Book::findOrFail($id)->delete();
+        return response()->json(['msg' => 'Successful removed']);
     }
 }

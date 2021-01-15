@@ -5,6 +5,8 @@ namespace Modules\Category\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Category\Entities\Category;
+use Modules\Category\Presenters\CategoryCollectionPresenter;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category::index');
+        $cats = Category::orderBy('id', 'asc')->get();
+
+        if ($cats->isNotEmpty()) {
+            return new CategoryCollectionPresenter($cats);
+        } else {
+            return response()->json(['msg' => 'Not found cats']);
+        }
     }
 
     /**
