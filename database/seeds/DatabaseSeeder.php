@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Modules\Book\Database\Seeders\BookDatabaseSeeder;
+use Modules\Category\Database\Seeders\CategoryDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(
-            Modules\Book\Database\Seeders\BookDatabaseSeeder::class
+            [
+                Modules\Book\Database\Seeders\BookDatabaseSeeder::class,
+                Modules\Category\Database\Seeders\CategoryDatabaseSeeder::class
+            ]
         );
     }
 }

@@ -16,7 +16,13 @@ class BookInfoPresenter extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'isbn' => $this->isbn
+            'isbn' => $this->isbn,
+            'categories' => $this->categories->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => $item->name
+                ];
+            })->toArray()
         ];
     }
 }

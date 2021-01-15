@@ -7,12 +7,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('db:seed');
+        $this->artisan('migrate:refresh --seed');
     }
 
     /**
