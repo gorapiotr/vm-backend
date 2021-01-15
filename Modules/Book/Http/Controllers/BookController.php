@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Book\Entities\Book;
 use Modules\Book\Presenters\BookCollectionPresenter;
+use Modules\Book\Presenters\BookInfoPresenter;
 
 class BookController extends Controller
 {
@@ -26,9 +27,15 @@ class BookController extends Controller
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('book::create');
+
+        $book = Book::firstOrCreate($request->all());
+
+        $presenter = new BookInfoPresenter($book);
+        $presenter->additional(['success' => true]);
+
+        return $presenter;
     }
 
     /**

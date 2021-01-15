@@ -15,4 +15,5 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'books'], function() {
     Route::get('/', 'BookController@index');
+    Route::post('/', 'BookController@create');
 });
