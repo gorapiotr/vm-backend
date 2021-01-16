@@ -2,8 +2,6 @@
 
 namespace Modules\Book\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Book\Entities\Book;
 use Modules\Book\Http\Requests\CreateBookRequest;
@@ -12,9 +10,16 @@ use Modules\Book\Http\Requests\EditBookRequest;
 use Modules\Book\Presenters\BookCollectionPresenter;
 use Modules\Book\Presenters\BookInfoPresenter;
 
+/**
+ * Class BookController
+ * @package Modules\Book\Http\Controllers
+ */
 class BookController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Http\JsonResponse|BookCollectionPresenter
+     */
     public function index()
     {
         $books = Book::orderBy('id', 'asc')->get();
@@ -26,9 +31,10 @@ class BookController extends Controller
         }
     }
 
+
     /**
-     * Show the form for creating a new resource.
-     * @return Response
+     * @param CreateBookRequest $request
+     * @return BookInfoPresenter
      */
     public function create(CreateBookRequest $request)
     {
@@ -46,30 +52,11 @@ class BookController extends Controller
         return $presenter;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('book::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * @param $id
+     * @param EditBookRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function edit($id, EditBookRequest $request)
     {
@@ -85,21 +72,10 @@ class BookController extends Controller
         return response()->json(['msg' => 'Successful edited']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
