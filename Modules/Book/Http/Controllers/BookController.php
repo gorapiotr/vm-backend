@@ -6,6 +6,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Book\Entities\Book;
+use Modules\Book\Http\Requests\CreateBookRequest;
+use Modules\Book\Http\Requests\DeleteBookRequest;
+use Modules\Book\Http\Requests\EditBookRequest;
 use Modules\Book\Presenters\BookCollectionPresenter;
 use Modules\Book\Presenters\BookInfoPresenter;
 
@@ -25,9 +28,9 @@ class BookController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * @return Renderable
+     * @return Response
      */
-    public function create(Request $request)
+    public function create(CreateBookRequest $request)
     {
 
         $book = Book::firstOrCreate([
@@ -68,7 +71,7 @@ class BookController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id, Request $request)
+    public function edit($id, EditBookRequest $request)
     {
         $book = Book::findOrFail($id);
 
