@@ -12,10 +12,14 @@
 
 ## Architecture
 
-Project architecture based on [nWidart/laravel-modules](`https://github.com/nWidart/laravel-modules`).
+Project architecture based on [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules).
 
-* [Book module](`https://github.com/gorapiotr/vm-backend/tree/main/Modules/Book`)
-* [Category module](`https://github.com/gorapiotr/vm-backend/tree/main/Modules/Category`)
+* [Book module](https://github.com/gorapiotr/vm-backend/tree/main/Modules/Book)
+* [Category module](https://github.com/gorapiotr/vm-backend/tree/main/Modules/Category)
+
+## Feature tests
+* [BookTest.php](https://github.com/gorapiotr/vm-backend/blob/main/Modules/Book/Tests/Feature/BookTest.php)
+* [CategoryTest.php](https://github.com/gorapiotr/vm-backend/blob/main/Modules/Category/Tests/Feature/CategoryTest.php)
 
 ### Docker database config
 ````
